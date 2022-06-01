@@ -41,8 +41,8 @@ class TicTacToe
         end
         
         move = gets.chomp.split() #accept user move input then turns into array
-        move[0] = move[0].to_i
-        move[1] = move[1].to_i
+        move.map! { |value| value.to_i }
+
         #check valid input
         if move.length != 2 || move[0] > 2 || move[1] > 2 || move[0] < 0 || move[1] < 0
             puts "bad input" #temporary
@@ -52,10 +52,25 @@ class TicTacToe
         column = move[1]
 
         @board[row][column] = game_piece
-    end    
+    end
+    
+    #private
+    def change_turn
+        if @turn == 1
+            @turn = 2
+        else
+            @turn = 1
+        end
+    end
+
 end
 
 game = TicTacToe.new
 game.board_display
+
+game.make_move
+game.board_display
+
+game.change_turn
 game.make_move
 game.board_display
