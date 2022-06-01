@@ -48,6 +48,8 @@ class TicTacToe
             puts "bad input" #temporary
         end
 
+        #Add check here for valid move
+
         row = move[0]
         column = move[1]
 
@@ -63,14 +65,62 @@ class TicTacToe
         end
     end
 
+    #private
+    def check_winner
+        #checks across
+        @board.each do |row|
+            if row.all?('O')
+                puts "O wins across"
+            elsif row.all?('X')
+                puts "X wins across"
+            end
+        end
+        #checks vertical    
+        0.upto(2) do |index| 
+            if @board.all? {|row| row[index] == 'O'}
+                puts "O wins vertical"
+            elsif @board.all? {|row| row[index] == 'X'}
+                puts "X wins vertical"
+            end
+        end
+        #checks diagonal right
+        if @board[0][0] == @board[1][1] && @board[2][2] == @board[1][1]
+            if @board[0][0] == 'O'
+              puts "O wins diagonal"
+            elsif @board[0][0] == 'X'
+              puts "X wins diagonal"
+            end
+          end
+        #checks diagonal left
+        if @board[0][2] == @board[1][1] && @board[1][1] == @board[2][0]
+            if @board[0][2] == 'O'
+              puts "O wins diagonal"
+            elsif @board[0][2] == 'X'
+              puts "X wins diagonal"
+            end
+        end
+    end
 end
 
 game = TicTacToe.new
 game.board_display
-
+#1 ,1
 game.make_move
 game.board_display
-
+#1, 2
 game.change_turn
 game.make_move
 game.board_display
+#2, 1
+game.change_turn
+game.make_move
+game.board_display
+#2, 2
+game.change_turn
+game.make_move
+game.board_display
+#3, 1
+game.change_turn
+game.make_move
+game.board_display
+game.check_winner
