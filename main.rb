@@ -108,7 +108,18 @@ class TicTacToe
             end
         end
         #check for stalemate
-
+        @board.each_with_index do |row, index|
+            if row.include?(nil)
+              contains_nil = true
+              break
+            else
+              contains_nil = false
+            end
+            if contains_nil == false && index == 2
+              puts "Stalemate!"
+              @winner = 1
+            end
+          end
     end
 
     public
