@@ -70,57 +70,59 @@ class TicTacToe
         #checks across
         @board.each do |row|
             if row.all?('O')
-                puts "O wins across"
+                puts "#{@player2} wins across"
+                @winner = 1
             elsif row.all?('X')
-                puts "X wins across"
+                puts "#{@player1} wins across"
+                @winner = 1
             end
         end
         #checks vertical    
         0.upto(2) do |index| 
             if @board.all? {|row| row[index] == 'O'}
-                puts "O wins vertical"
+                puts "#{@player2} wins vertical"
+                @winner = 1
             elsif @board.all? {|row| row[index] == 'X'}
-                puts "X wins vertical"
+                puts "#{@player1} wins vertical"
+                @winner = 1
             end
         end
         #checks diagonal right
         if @board[0][0] == @board[1][1] && @board[2][2] == @board[1][1]
             if @board[0][0] == 'O'
-              puts "O wins diagonal"
+              puts "#{@player2} wins diagonal"
+              @winner = 1
             elsif @board[0][0] == 'X'
-              puts "X wins diagonal"
+              puts "#{@player1} wins diagonal"
+              @winner = 1
             end
           end
         #checks diagonal left
         if @board[0][2] == @board[1][1] && @board[1][1] == @board[2][0]
             if @board[0][2] == 'O'
-              puts "O wins diagonal"
+              puts "#{@player2} wins diagonal"
+              @winner = 1
             elsif @board[0][2] == 'X'
-              puts "X wins diagonal"
+              puts "#{@player1} wins diagonal"
+              @winner = 1
             end
         end
+        #check for stalemate
+
     end
+
+    public
+    def play_game
+        while @winner == 0
+            make_move
+            board_display
+            check_winner
+            change_turn
+        end
+        puts "GAME OVER"
+    end
+
 end
 
 game = TicTacToe.new
-game.board_display
-#1 ,1
-game.make_move
-game.board_display
-#1, 2
-game.change_turn
-game.make_move
-game.board_display
-#2, 1
-game.change_turn
-game.make_move
-game.board_display
-#2, 2
-game.change_turn
-game.make_move
-game.board_display
-#3, 1
-game.change_turn
-game.make_move
-game.board_display
-game.check_winner
+game.play_game
