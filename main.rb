@@ -41,16 +41,15 @@ class TicTacToe
         end
         
         move = gets.chomp.split() #accept user move input then turns into array
+        move[0] = move[0].to_i
+        move[1] = move[1].to_i
+        #check valid input
+        if move.length != 2 || move[0] > 2 || move[1] > 2 || move[0] < 0 || move[1] < 0
+            puts "bad input" #temporary
+        end
 
-        #check  valid input
-        #if move.length !== 2 || move[0] > 2 || move[1] > 2 || move[0] < 0 || move[1] < 0
-        #    puts "bad input" #temporary
-            #bad_input --need to define this method
-        #end
-
-        #make the move now
-        row = move[0].to_i
-        column = move[1].to_i
+        row = move[0]
+        column = move[1]
 
         @board[row][column] = game_piece
     end    
